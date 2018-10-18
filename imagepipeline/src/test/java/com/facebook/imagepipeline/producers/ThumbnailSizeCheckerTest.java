@@ -30,7 +30,7 @@ public class ThumbnailSizeCheckerTest {
   public void testWithWidthAndHeightAndResizeOptionsNotMoreThan133PercentOfActual() {
     for (int i = 0; i < TEST_COUNT; i++) {
       ResizeOptions resizeOptions = new ResizeOptions(REQUEST_WIDTHS[i], REQUEST_HEIGHTS[i]);
-      assertTrue(ThumbnailSizeChecker
+      assertFalse(ThumbnailSizeChecker
           .isImageBigEnough(IMAGE_WIDTHS[i], IMAGE_HEIGHTS[i], resizeOptions));
     }
   }
@@ -59,7 +59,7 @@ public class ThumbnailSizeCheckerTest {
 
   @Test
   public void testWithLargeEnoughWidthAndHeightWhenNoResizeOptions() {
-    assertTrue(ThumbnailSizeChecker.isImageBigEnough(
+    assertFalse(ThumbnailSizeChecker.isImageBigEnough(
         BIG_ENOUGH_SIZE_FOR_NO_RESIZE_OPTIONS,
         BIG_ENOUGH_SIZE_FOR_NO_RESIZE_OPTIONS,
         null));
@@ -99,7 +99,7 @@ public class ThumbnailSizeCheckerTest {
       for (int i = 0; i < TEST_COUNT; i++) {
         EncodedImage encodedImage = mockImage(imageWidths[i], imageHeights[i], rotation);
         ResizeOptions resizeOptions = new ResizeOptions(REQUEST_WIDTHS[i], REQUEST_HEIGHTS[i]);
-        assertTrue(ThumbnailSizeChecker.isImageBigEnough(encodedImage, resizeOptions));
+        assertFalse(ThumbnailSizeChecker.isImageBigEnough(encodedImage, resizeOptions));
       }
     }
   }
@@ -144,7 +144,7 @@ public class ThumbnailSizeCheckerTest {
   @Test
   public void testWithLargeEnoughImageWhenNoResizeOptions() {
     for (int rotation = 0; rotation < 360; rotation += 90) {
-      assertTrue(ThumbnailSizeChecker.isImageBigEnough(
+      assertFalse(ThumbnailSizeChecker.isImageBigEnough(
           mockImage(
           BIG_ENOUGH_SIZE_FOR_NO_RESIZE_OPTIONS,
           BIG_ENOUGH_SIZE_FOR_NO_RESIZE_OPTIONS,
